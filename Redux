@@ -1,0 +1,106 @@
+npx create-react-app redux-todo
+cd redux-todo
+Install Redux dependencies:
+npm install redux react-redux
+code.
+Create the Redux store:
+Create a new file src/redux/store.js
+import {createStore } from 'redux';
+import todoReducer from'./reducers';
+const store = createStore(todoReducer);
+export default store;
+Create Redux actions:
+Create a new file src/redux/actions.js:
+export const addTodo = (text) => ({
+type: 'ADD_TODO',
+payload: {text},
+});
+export const toggleTodo = (id) => ({
+type: 'TOGGLE_TODO',
+payload: {id},
+});
+Create Redux reducers:
+Create a new file src/redux/reducers.js:
+const initialState = {
+todos: ,
+}
+const todoReducer = (state = initialState, action) => {
+switch (action.type) {
+case 'ADD_TODO':
+return {
+todos: [
+...state.todos,
+id: state.todos.length + 1,
+}
+}
+1.
+}
+text: action.payload.text,
+completed: false,
+}
+case 'TOGGLE_TODO':
+return {
+todos: state.todos.map((todo) =>
+todo.id === action.payload.id
+? {...todo, completed: !todo.completed}
+),
+: todo
+default:
+return state;
+export default todoReducer;
+src/App.js
+import React, {useState } from 'react';
+import {connect} from 'react-redux';
+import {addTodo, toggleTodo } from './redux/actions';
+const App = ({todos, addTodo, toggleTodo }) =>{
+const [newTodo, setNewTodo] = useState(");
+const handleAddTodo = () => {
+if (newTodo.trim() !== ") {
+addTodo(newTodo);
+setNewTodo(");
+}
+return (
+<div>
+<h1>Redux ToDo App</h1>
+<div>
+<input
+type="text"
+value={newTodo}
+onChange={(e) => setNewTodo(e.target.value)}
+/>
+<button onClick={handleAddTodo}>Add Todo</button>
+</div>
+<ul>
+{todos.map((todo) => (
+<li
+key={todo.id}
+onClick={() => toggleTodo(todo.id)}
+style={{ textDecoration: todo.completed? 'line-through: 'none' }}
+<
+{todo.text}
+</li>
+))}
+</ul>
+</div>
+);
+}
+const mapStateToProps = (state) => ){
+todos: state.todos,
+});
+export default connect(mapStateToProps, {addTodo, toggleTodo })(App);
+Connect the app to the Redux store:
+Update src/index.js:
+import React from 'react';
+import {createRoot} from 'react-dom/client';
+import {Provider} from 'react-redux';
+import store from'./redux/store';
+import App from './App';
+const root = createRoot(document.getElementByld('root'));
+root.render(
+<Provider store={store}>
+<App />
+</Provider>
+);
+Run the app:
+npm start
+http://localhost:3000/index.html
