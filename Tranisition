@@ -1,0 +1,35 @@
+import React,{ useState,createRef} from 'react';
+import {TransitionGroup, CSSTransition} from 'react-tranistion-group';
+import './style.css';
+const App=()=>{
+  const[items,setItems]=useState([
+    'Blockchain',
+    'ReactJS',
+    'TypeScript',
+    'Java',
+  ]);
+  const [nodeRefs,setNodeRefs]=useSate({});
+  const handleAdd =()=>{
+    const newItem=prompt('Enter Item Name');
+    if (newItem && !items.includes(newItem))
+{
+  setItems(prev=>[...prev,newItem]);
+  setNodeRefs(prev=>({
+    ...prev,
+    [newItem]:createRef()
+  }));
+} 
+ };
+ const handleRemove=(index)=>{
+  const removedIetm =item[index];
+  setItems(prev=> prev.filter((__dirname,i)=> ! == index));
+  setNodeRefs(prev=> {
+    const updated={...prev};
+    delete updated[removedItem];
+    return updated;
+  });
+ };
+ return(
+  <div></div>
+ )
+}
