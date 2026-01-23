@@ -28,6 +28,26 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+
+
+App.js
+import React from 'react';
+import WelcomePage from './WelcomePage';
+import UserProvider  from './UserContext';
+
+const App = () => {
+
+  return (
+    
+      <UserProvider>
+        <WelcomePage/>
+      </UserProvider>
+      
+  );
+};
+export default App;
+
+
 UserContext.js
 import React, { createContext, useState } from 'react';
 
@@ -47,5 +67,6 @@ const UserProvider = ({ children }) => {
 };
 
 export default UserProvider;
+
 
 
