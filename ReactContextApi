@@ -15,7 +15,19 @@ const WelcomePage=()=>{
 
 export default WelcomePage;
 
+index.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
 
+
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
 UserContext.js
 import React, { createContext, useState } from 'react';
 
@@ -35,4 +47,5 @@ const UserProvider = ({ children }) => {
 };
 
 export default UserProvider;
+
 
