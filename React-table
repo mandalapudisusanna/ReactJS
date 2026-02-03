@@ -1,1 +1,88 @@
+same as react-map replace with table
+
+
+
+import React from 'react'
+import {
+  useReactTable,
+  getCoreRowModel,
+  flexRender
+} from '@tanstack/react-table'
+
+function App() {
+
+  const data = React.useMemo(() => [
+    { id: 1, name: 'John Doe', age: 28, email: 'john@example.com' },
+    { id: 2, name: 'Jane Smith', age: 34, email: 'jane@example.com' },
+    { id: 3, name: 'Sam Johnson', age: 45, email: 'sam@example.com' },
+    { id: 4, name: 'Alice Brown', age: 23, email: 'alice@example.com' }
+  ], [])
+
+  const columns = React.useMemo(() => [
+    {
+      header: 'ID',
+      accessorKey: 'id',
+    },
+    {
+      header: 'Name',
+      accessorKey: 'name',
+    },
+    {
+      header: 'Age',
+      accessorKey: 'age',
+    },
+    {
+      header: 'Email',
+      accessorKey: 'email',
+    },
+  ], [])
+
+  const table = useReactTable({
+    data,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+  })
+
+  return (
+    <div style={{ padding: 20 }}>
+      <h2>User Table</h2>
+
+      <table border="1" cellPadding="10" width="100%">
+        <thead>
+          {table.getHeaderGroups().map(headerGroup => (
+            <tr key={headerGroup.id}>
+              {headerGroup.headers.map(header => (
+                <th key={header.id}>
+                  {flexRender(
+                    header.column.columnDef.header,
+                    header.getContext()
+                  )}
+                </th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+
+        <tbody>
+          {table.getRowModel().rows.map(row => (
+            <tr key={row.id}>
+              {row.getVisibleCells().map(cell => (
+                <td key={cell.id}>
+                  {flexRender(
+                    cell.column.columnDef.cell,
+                    cell.getContext()
+                  )}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+
+     
+      </table>
+    </div>
+  )
+}
+
+export default App
 
